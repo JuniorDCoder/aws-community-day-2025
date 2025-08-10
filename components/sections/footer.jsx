@@ -1,10 +1,12 @@
 import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
+import Timer from "@/components/sections/timer";
 
 const Footer = (props) => (
     <>
         <section className="bg-primary">
+            <Timer data-aos="fade-up" classsName="p-12 py-16" highlightColor="secondary" targetDate="2025-11-08T00:00:00" />
             <div className="border-2 mb-4 border-gray-700 flex px-12 items-center gap-12 justify-center">
                 <Link href="/" className="border-r-2 border-r-gray-700">
                     <Image

@@ -49,16 +49,15 @@ const Timer = ({ targetDate, highlightColor = "primary", classsName }) => {
 
     return (
         <div
-            data-aos="fade-up"
             className={`flex flex-row items-center justify-between py-6 ${classsName}`}
 
         >
-            <h4 className={`font-bold w-3/5 text-5xl ${highlightClass}`}>
+            <h4 data-aos="fade-up" className={`font-bold w-3/5 text-5xl ${highlightClass}`}>
                 Don’t miss this{" "}
                 <span className="text-secondary">year’s </span>
                 Community <span className="text-secondary">Day!</span>
             </h4>
-            <div className="flex items-center gap-2">
+            <div data-aos="fade-up" className="flex items-center gap-2">
                 {[
                     { label: "Days", value: timeLeft.days },
                     { label: "Hours", value: timeLeft.hours },

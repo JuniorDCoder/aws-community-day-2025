@@ -57,7 +57,6 @@ const Communities = (props) => (
 
             </div>
 
-            <Timer data-aos="fade-up" classsName="px-12" highlightColor="secondary" targetDate="2025-11-08T00:00:00" />
         </section>
 
     </>

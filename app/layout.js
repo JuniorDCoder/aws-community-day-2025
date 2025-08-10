@@ -4,6 +4,8 @@ import Header from "../components/sections/header";
 import ClientLayout from "../components/client-layout";
 import Footer from "@/components/sections/footer";
 import ScrollToTop from "@/components/scroll-to-top";
+import Timer from "@/components/sections/timer";
+import React from "react";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",

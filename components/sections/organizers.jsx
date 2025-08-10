@@ -2,6 +2,10 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 import SpeakerCard from "@/components/speaker-card";
 
 const organizersData = [
@@ -29,7 +33,7 @@ const organizersData = [
 
 const Organizers = () => (
    <section className="bg-primary">
-       <div className="p-12 bg-primary text-center">
+       <div className="p-12 bg-primary w-full flex flex-col gap-5 text-center">
            <h2 data-aos="fade-up" className="text-4xl font-bold text-white mb-8">
                OUR <span className="text-secondary">Organizers</span>
            </h2>

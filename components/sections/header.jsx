@@ -8,13 +8,13 @@ import Button from "@/components/button";
 
 const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
+    // { href: '/about', label: 'About' },
     { href: '/gallery', label: 'Gallery' },
     { href: '/speakers', label: 'Speakers' },
     { href: '/agenda', label: 'Agenda' },
     { href: '/sponsors', label: 'Sponsors' },
     { href: '/team', label: 'Team' },
-    { href: '/contact', label: 'Contact Us' },
+    { href: '/contact', label: 'Get To Us' },
 ];
 
 const Header = (props) => {
@@ -22,13 +22,15 @@ const Header = (props) => {
 
     return (
         <header className="bg-primary py-5 px-20 w-full flex justify-between items-center border-b border-gray-500">
-            <Image
-                src="/logo.png"
-                alt="AWS Community Day Cameroon 2025 Logo"
-                width={50}
-                height={38}
-                style={{ objectFit: "contain" }}
-            />
+            <Link href="/">
+                <Image
+                    src="/logo.png"
+                    alt="AWS Community Day Cameroon 2025 Logo"
+                    width={50}
+                    height={38}
+                    style={{ objectFit: "contain" }}
+                />
+            </Link>
             <nav className="flex gap-[36px] text-white items-center justify-center">
                 {navLinks.map(({ href, label }) => (
                     <Link
