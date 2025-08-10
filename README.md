@@ -1,8 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AWS Community Day 2025 Web Application
+
+This repository contains the source code for the AWS Community Day 2025 event website, built with [Next.js](https://nextjs.org). The application is designed for scalability, maintainability, and future internationalization.
+
+## Project Overview
+
+- **Framework:** Next.js (App Router)
+- **Styling:** [Geist](https://vercel.com/font) font via `next/font`
+- **Deployment:** Vercel (recommended)
+- **Internationalization:** English and French translations planned (coming soon)
+
+## Features
+
+- Modern React architecture using Next.js
+- Optimized font loading for performance and aesthetics
+- Modular codebase for easy feature extension
+- Ready for multi-language support (i18n)
 
 ## Getting Started
 
-First, run the development server:
+To run the development server:
 
 ```bash
 npm run dev
@@ -14,23 +30,31 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+You can begin development by editing `app/page.js`. Hot reloading is enabled for rapid iteration.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Internationalization Roadmap
 
-## Learn More
+Support for English and French translations will be integrated using Next.js i18n routing and translation files. This will enhance accessibility and user experience for a broader audience.
 
-To learn more about Next.js, take a look at the following resources:
+## Engineering Practices
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Version Control:** Git for source management
+- **Code Quality:** Modular components, clear separation of concerns
+- **Performance:** Font optimization, server-side rendering
+- **Scalability:** Designed for future feature additions and localization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Documentation & Resources
 
-## Deploy on Vercel
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Next.js Deployment Guide](https://nextjs.org/docs/app/building-your-application/deploying)
+- [Geist Font](https://vercel.com/font)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy seamlessly on [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+
+---
+
+*This README will be updated as new features, including internationalization, are implemented.*
