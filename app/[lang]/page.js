@@ -11,21 +11,21 @@ import BottomHero from "@/components/sections/bottom-hero";
 import Communities from "@/components/sections/communities";
 
 export default function Home() {
-  return (
-      <>
-          <main className="flex flex-col">
-              <Hero />
-              <Gallery />
-              <Banner />
-              <Speakers />
-              <Agenda />
-              <Location />
-              <Sponsors />
-              <Organizers/>
-              <Volunteers/>
-              <BottomHero/>
-              <Communities/>
-          </main>
-      </>
-  );
+    return (
+        <>
+            <main className="flex flex-col">
+                <Hero />
+                <Gallery />
+                <Banner />
+                <Speakers />
+                <Agenda />
+                <Location />
+                <Sponsors />
+                <Organizers/>
+                <Volunteers/>
+                <BottomHero/>
+                <Communities/>
+            </main>
+        </>
+    );
 }

@@ -9,7 +9,7 @@ const Location = (props) => (
             <div data-aos="fade-up" className="grid grid-cols-2 w-full mt-8 gap-2">
                 {/* Large image on the left */}
                 <Image
-                    src="/location/1.png"
+                    src="/en/location/1.png"
                     alt="University of Buea"
                     width={600}
                     height={600}
@@ -19,28 +19,28 @@ const Location = (props) => (
                 {/* 2x2 grid on the right */}
                 <div className="grid grid-cols-2 grid-rows-1 gap-2 h-full">
                     <Image
-                        src="/location/2.png"
+                        src="/en/location/2.png"
                         alt="Location 2"
                         width={400}
                         height={300}
                         className="rounded-xl shadow-lg object-cover w-full h-full"
                     />
                     <Image
-                        src="/location/3.png"
+                        src="/en/location/3.png"
                         alt="Location 3"
                         width={400}
                         height={300}
                         className="rounded-xl shadow-lg object-cover w-full h-full"
                     />
                     <Image
-                        src="/location/4.png"
+                        src="/en/location/4.png"
                         alt="Mount Cameroon National Park"
                         width={400}
                         height={300}
                         className="rounded-xl shadow-lg object-cover w-full h-full"
                     />
                     <Image
-                        src="/location/5.png"
+                        src="/en/location/5.png"
                         alt="Location 5"
                         width={400}
                         height={300}

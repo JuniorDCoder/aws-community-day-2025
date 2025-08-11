@@ -1,11 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Header from "../components/sections/header";
-import ClientLayout from "../components/client-layout";
-import Footer from "@/components/sections/footer";
-import ScrollToTop from "@/components/scroll-to-top";
-import Timer from "@/components/sections/timer";
-import React from "react";
+import "../globals.css";
+import LayoutContent from "../../components/layout-content";
+import { locales } from '../../lib/i18n'
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -22,16 +18,21 @@ export const metadata = {
     description: "Official website for AWS Community Day Cameroon 2025. Join us for talks, workshops, and networking with AWS enthusiasts.",
 };
 
-export default function RootLayout({ children }) {
+// Generate static params for all locales
+export async function generateStaticParams() {
+    return locales.map((locale) => ({ lang: locale }))
+}
+
+export default async function RootLayout({ children, params }) {
+    // Await params to fix the async warning
+    const { lang } = await params
+
     return (
-        <html lang="en">
+        <html lang={lang} suppressHydrationWarning>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ClientLayout>
-            <Header />
+        <LayoutContent lang={lang}>
             {children}
-            <Footer />
-            <ScrollToTop />
-        </ClientLayout>
+        </LayoutContent>
         </body>
         </html>
     );

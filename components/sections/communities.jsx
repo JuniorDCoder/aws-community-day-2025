@@ -12,17 +12,17 @@ const organizingCommunities = [
     {
         name: "AWS Cloud Clubs UBa",
         description: "Description for Community 1",
-        image: "/organizing-communities/1.png",
+        image: "/en/organizing-communities/1.png",
     },
     {
         name: "AWS Cloud Clubs UBa",
         description: "Description for Community 2",
-        image: "/organizing-communities/1.png",
+        image: "/en/organizing-communities/1.png",
     },
     {
         name: "AWS Cloud Clubs UBa",
         description: "Description for Community 3",
-        image: "/organizing-communities/1.png",
+        image: "/en/organizing-communities/1.png",
     }
 ];
 

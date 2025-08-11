@@ -29,7 +29,7 @@ const ScrollToTop = () => {
             className="fixed cursor-pointer bottom-8 right-8 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-secondary shadow-lg hover:bg-secondary/90 transition-colors"
             style={{ boxShadow: "0 4px 10px rgb(0 0 0 / 0.25)" }}
         >
-            <Image src="/scroll.png" alt="Scroll to top" width={24} height={24} />
+            <Image src="/en/scroll.png" alt="Scroll to top" width={24} height={24} />
         </button>
     );
 };

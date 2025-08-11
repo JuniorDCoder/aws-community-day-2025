@@ -5,26 +5,26 @@ import Image from 'next/image';
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import Button from "@/components/button";
+import LanguageSwitcher from '@/components/language-switcher';
 
-const navLinks = [
-    { href: '/', label: 'Home' },
-    // { href: '/about', label: 'About' },
-    { href: '/gallery', label: 'Gallery' },
-    { href: '/speakers', label: 'Speakers' },
-    { href: '/agenda', label: 'Agenda' },
-    { href: '/sponsors', label: 'Sponsors' },
-    { href: '/team', label: 'Team' },
-    { href: '/contact', label: 'Get To Us' },
-];
-
-const Header = (props) => {
+const Header = ({ lang, dict }) => {
     const pathname = usePathname();
+
+    const navLinks = [
+        { href: `/${lang}`, label: dict?.home || 'Home' },
+        { href: `/${lang}/gallery`, label: dict?.gallery || 'Gallery' },
+        { href: `/${lang}/speakers`, label: dict?.speakers || 'Speakers' },
+        { href: `/${lang}/agenda`, label: dict?.agenda || 'Agenda' },
+        { href: `/${lang}/sponsors`, label: dict?.sponsors || 'Sponsors' },
+        { href: `/${lang}/team`, label: dict?.team || 'Team' },
+        { href: `/${lang}/contact`, label: dict?.contact || 'Get To Us' },
+    ];
 
     return (
         <header className="bg-primary py-5 px-20 w-full flex justify-between items-center border-b border-gray-500">
-            <Link href="/">
+            <Link href={`/${lang}`}>
                 <Image
-                    src="/logo.png"
+                    src="/en/logo.png"
                     alt="AWS Community Day Cameroon 2025 Logo"
                     width={50}
                     height={38}
@@ -41,9 +41,9 @@ const Header = (props) => {
                         {label}
                     </Link>
                 ))}
-                <span>Fr</span>
+                <LanguageSwitcher currentLang={lang} />
             </nav>
-            <Button text="Register Now" />
+            <Button text={dict?.registerNow || "Register Now"} />
         </header>
     );
 };

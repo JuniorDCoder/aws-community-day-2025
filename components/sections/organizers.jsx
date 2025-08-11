@@ -12,22 +12,22 @@ const organizersData = [
     {
         name: "Steve Yonkue",
         title: "AWS User Group Douala",
-        image: "/speakers/1.png",
+        image: "/en/speakers/1.png",
     },
     {
         name: "Ayoko Delia",
         title: "AWS User Group Bamenda",
-        image: "/speakers/1.png",
+        image: "/en/speakers/1.png",
     },
     {
         name: "Dinnyuy Fru Angu",
         title: "AWS User Group Douala",
-        image: "/speakers/1.png",
+        image: "/en/speakers/1.png",
     },
     {
         name: "Veliswa Boya",
         title: "AWS User Group Douala",
-        image: "/speakers/1.png",
+        image: "/en/speakers/1.png",
     },
 ];
 
