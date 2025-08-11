@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 import { Pagination } from "swiper/modules";
-
-import 'swiper/css';
 import 'swiper/css/pagination';
 
 import SpeakerCard from "@/components/speaker-card";
@@ -33,14 +33,14 @@ const organizersData = [
 
 const Organizers = () => (
    <section className="bg-primary">
-       <div className="p-12 bg-primary w-full flex flex-col gap-5 text-center">
-           <h2 data-aos="fade-up" className="text-4xl font-bold text-white mb-8">
+       <div className="md:p-12 p-6 bg-primary w-full flex flex-col gap-5 text-center">
+           <h2 data-aos="fade-up" className="md:text-5xl text-3xl font-bold text-white mb-4 md:mb-8">
                OUR <span className="text-secondary">Organizers</span>
            </h2>
 
-           <div data-aos="fade-up" className="max-w-6xl mx-auto">
+           <div data-aos="fade-up" className="md:max-w-6xl max-w-lg md:mx-auto">
                <Swiper
-                   modules={[Pagination]}
+                   modules={[Pagination, Autoplay]}
                    pagination={{
                        clickable: true,
                        el: ".custom-pagination",
@@ -49,6 +49,11 @@ const Organizers = () => (
                    }}
                    spaceBetween={20}
                    slidesPerView={1}
+                   autoplay={{
+                       delay: 2000,
+                       disableOnInteraction: false,
+                   }}
+                   loop={true}
                    breakpoints={{
                        640: { slidesPerView: 1 },
                        768: { slidesPerView: 2 },

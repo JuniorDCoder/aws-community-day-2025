@@ -4,11 +4,11 @@ import Link from "next/link";
 
 const Banner = (props) => (
     <>
-        <Link href="/" className="flex flex-col gap-4 bg-primary pb-6">
-            <h2 data-aos="fade-up"  className="text-5xl font-bold text-center mt-12 text-white">
+        <Link href="/" className="flex flex-col md:px-0 px-6 gap-4 bg-primary pb-6">
+            <h2 data-aos="fade-up"  className="md:text-5xl text-3xl font-bold md:text-center mt-12 text-white">
                 Community Day <span className="text-secondary">2025</span>
-                <Image src="/en/banners/1.png" alt="Banner"
-                width={1300} height={0} className="mx-auto mt-5"
+                <Image src="/en/banners/1.png"
+                width={1300} height={0} className="mx-auto mt-5" alt="Banner"
                 />
             </h2>
         </Link>

@@ -18,5 +18,10 @@
     "seconds": "Secondes"
   },
   "galleryTitle": "La Journée Communautaire",
-  "galleryButton": "Voir la galerie complète"
+  "galleryButton": "Voir la galerie complète",
+  "footer" : {
+    "followUs": "Suivez-nous pour plus d'actualités",
+    "contactText": "Vous pouvez nous écrire pour toute question ou proposition à",
+    "copyright": "Copyright AWS Community Day Cameroon. Tous droits réservés | Réalisé par"
+  }
 }

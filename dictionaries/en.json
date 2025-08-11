@@ -18,5 +18,11 @@
     "seconds": "Seconds"
   },
   "galleryTitle": "Community Day",
-  "galleryButton": "View Full Gallery"
+  "galleryButton": "View Full Gallery",
+  "footer": {
+    "followUs": "Follow us for more updates",
+    "contactText": "You can write to us for any questions or proposals at",
+    "copyright": "Copyright AWS Community Day Cameroon. All rights reserved | Built by"
+  }
+
 }

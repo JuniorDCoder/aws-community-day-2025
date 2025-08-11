@@ -1,12 +1,13 @@
 "use client";
 
 import React from 'react';
-import Timer from "@/components/sections/timer";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Pagination} from "swiper/modules";
-import SpeakerCard from "@/components/speaker-card";
-import Button from "@/components/button";
+import {Pagination, Autoplay} from "swiper/modules";
+import "swiper/css";
+import 'swiper/css/pagination';
 import OrganizingCommunity from "@/components/organizing-community";
+import { Facebook, Linkedin, Instagram, Twitter } from "lucide-react";
+
 
 const organizingCommunities = [
     {
@@ -28,15 +29,25 @@ const organizingCommunities = [
 
 const Communities = (props) => (
     <>
-        <section className="p-12 bg-primary w-full mx-auto flex flex-col">
-            <h2 data-aos="fade-up"  className="text-4xl font-bold text-center text-white mb-12">
+        <section className="md:p-12 p-6 bg-primary w-full mx-auto flex flex-col">
+            <h2 data-aos="fade-up" className="md:text-4xl text-3xl font-bold md:text-center text-white mb-4 md:mb-12">
                 OUR ORGANIZING <span className="text-secondary">COMMUNITIES </span>
             </h2>
 
-            <div data-aos="fade-up"  className="max-w-6xl mx-auto">
+            <div data-aos="fade-up"  className="md:max-w-6xl max-w-lg md:mx-auto">
                 <Swiper
-                    modules={[Pagination]}
-                    pagination={{ clickable: true, el: ".custom-pagination", bulletClass: "custom-bullet", bulletActiveClass: "custom-bullet-active" }}
+                    modules={[Pagination, Autoplay]}
+                    pagination={{
+                        clickable: true,
+                        el: ".custom-pagination",
+                        bulletClass: "custom-bullet",
+                        bulletActiveClass: "custom-bullet-active",
+                    }}
+                    autoplay={{
+                        delay: 2000,
+                        disableOnInteraction: false,
+                    }}
+                    loop={true}
                     spaceBetween={30}
                     slidesPerView={1}
                     breakpoints={{
@@ -54,7 +65,6 @@ const Communities = (props) => (
 
                 {/* Custom Pagination Container */}
                 <div className="custom-pagination mt-6 flex justify-center gap-3"></div>
-
             </div>
 
         </section>

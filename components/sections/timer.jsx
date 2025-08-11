@@ -69,9 +69,9 @@ const Timer = ({ targetDate, highlightColor = "primary", classsName, dict }) => 
 
     return (
         <div
-            className={`flex flex-row items-center justify-between py-6 ${classsName}`}
+            className={`flex flex-col md:flex-row items-center md:gap-0 gap-4 md:justify-between md:py-6 ${classsName}`}
         >
-            <h4 data-aos="fade-up" className={`font-bold w-3/5 text-5xl ${highlightClass}`}>
+            <h4 data-aos="fade-up" className={`font-bold w-full md:w-3/5 text-3xl md:text-5xl ${highlightClass}`}>
                 {dict?.timer?.dontMiss || "Don't miss this"}{" "}
                 <span className="text-secondary">{dict?.timer?.year || "year's"} </span>
                 {dict?.timer?.community || "Community"} <span className="text-secondary">{dict?.timer?.day || "Day"}!</span>
@@ -79,8 +79,8 @@ const Timer = ({ targetDate, highlightColor = "primary", classsName, dict }) => 
             <div data-aos="fade-up" className="flex items-center gap-2">
                 {timeLabels.map((item, index) => (
                     <React.Fragment key={item.label}>
-                        <div className="bg-[#EAEDED] py-3 px-5 rounded-md flex items-center justify-center flex-col gap-1">
-                            <h4 className="text-primary font-bold text-4xl">
+                        <div className="bg-[#EAEDED] py-3 px-3 md:px-5 rounded-md flex items-center justify-center flex-col gap-1">
+                            <h4 className="text-primary font-bold md:text-4xl">
                                 {item.value.toString().padStart(2, "0")}
                             </h4>
                             <p className="text-xs font-semibold text-secondary">
@@ -88,7 +88,7 @@ const Timer = ({ targetDate, highlightColor = "primary", classsName, dict }) => 
                             </p>
                         </div>
                         {index < 3 && (
-                            <span className="text-primary text-4xl font-bold">:</span>
+                            <span className="text-primary md:text-4xl font-bold">:</span>
                         )}
                     </React.Fragment>
                 ))}

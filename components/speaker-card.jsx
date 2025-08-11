@@ -7,7 +7,7 @@ const SpeakerCard = ({ image, name, title, tag, tagColor, type = "speaker" }) =>
     const isVolunteer = type === "volunteer";
 
     return (
-        <div className="relative rounded-lg overflow-hidden shadow-lg">
+        <div data-aos="fade-up" className="relative rounded-lg overflow-hidden shadow-lg">
             {/* Tag (only for speaker) */}
             {isSpeaker && tag && (
                 <span
@@ -24,8 +24,9 @@ const SpeakerCard = ({ image, name, title, tag, tagColor, type = "speaker" }) =>
                 alt={name}
                 width={400}
                 height={500}
-                className="object-cover w-full h-96 border border-gray-700"
+                className="object-cover w-full h-64 sm:h-80 md:h-96 border border-gray-700"
             />
+
 
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-[rgba(27,36,61,0)_35.6%] to-[#1B243D]"></div>
@@ -49,7 +50,7 @@ const SpeakerCard = ({ image, name, title, tag, tagColor, type = "speaker" }) =>
 
                 {/* Short line for organizer */}
                 {isOrganizer && (
-                    <div className="mt-1 ml-24 w-12 h-1 bg-secondary rounded"></div>
+                    <div className="mt-1 ml-[44%] md:ml-24 w-12 h-1 bg-secondary rounded"></div>
                 )}
 
             </div>
