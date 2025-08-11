@@ -6,5 +6,17 @@
   "sponsors": "Sponsors",
   "team": "Équipe",
   "contact": "Contactez-nous",
-  "registerNow": "Inscrivez-vous"
+  "registerNow": "Inscrivez-vous",
+  "timer": {
+    "dontMiss": "Ne manquez pas cette",
+    "year": "année",
+    "community": "Journée Communautaire",
+    "day": "",
+    "days": "Jours",
+    "hours": "Heures",
+    "minutes": "Minutes",
+    "seconds": "Secondes"
+  },
+  "galleryTitle": "La Journée Communautaire",
+  "galleryButton": "Voir la galerie complète"
 }

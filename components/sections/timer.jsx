@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 
-const Timer = ({ targetDate, highlightColor = "primary", classsName }) => {
+const Timer = ({ targetDate, highlightColor = "primary", classsName, dict }) => {
     const calculateTimeLeft = () => {
         const difference = +new Date(targetDate) - +new Date();
         if (difference <= 0) {
@@ -47,23 +47,37 @@ const Timer = ({ targetDate, highlightColor = "primary", classsName }) => {
     const highlightClass =
         highlightColor === "secondary" ? "text-white" : "text-primary";
 
+    // Get time labels from dictionary with fallbacks
+    const timeLabels = [
+        {
+            label: dict?.timer?.days || "Days",
+            value: timeLeft.days
+        },
+        {
+            label: dict?.timer?.hours || "Hours",
+            value: timeLeft.hours
+        },
+        {
+            label: dict?.timer?.minutes || "Minutes",
+            value: timeLeft.minutes
+        },
+        {
+            label: dict?.timer?.seconds || "Seconds",
+            value: timeLeft.seconds
+        },
+    ];
+
     return (
         <div
             className={`flex flex-row items-center justify-between py-6 ${classsName}`}
-
         >
             <h4 data-aos="fade-up" className={`font-bold w-3/5 text-5xl ${highlightClass}`}>
-                Don’t miss this{" "}
-                <span className="text-secondary">year’s </span>
-                Community <span className="text-secondary">Day!</span>
+                {dict?.timer?.dontMiss || "Don't miss this"}{" "}
+                <span className="text-secondary">{dict?.timer?.year || "year's"} </span>
+                {dict?.timer?.community || "Community"} <span className="text-secondary">{dict?.timer?.day || "Day"}!</span>
             </h4>
             <div data-aos="fade-up" className="flex items-center gap-2">
-                {[
-                    { label: "Days", value: timeLeft.days },
-                    { label: "Hours", value: timeLeft.hours },
-                    { label: "Minutes", value: timeLeft.minutes },
-                    { label: "Seconds", value: timeLeft.seconds },
-                ].map((item, index) => (
+                {timeLabels.map((item, index) => (
                     <React.Fragment key={item.label}>
                         <div className="bg-[#EAEDED] py-3 px-5 rounded-md flex items-center justify-center flex-col gap-1">
                             <h4 className="text-primary font-bold text-4xl">
