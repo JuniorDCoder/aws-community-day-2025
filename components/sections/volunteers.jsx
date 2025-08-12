@@ -39,11 +39,11 @@ const volunteersData = [
     },
 ];
 
-const Volunteers = () => (
+const Volunteers = ({dict}) => (
     <section className="bg-primary">
         <div className="md:p-12 p-6 bg-primary text-center">
             <h2 data-aos="fade-up" className="text-4xl font-bold text-white mb-8">
-                VOLUNTEERS
+                {dict.volunteers.title}
             </h2>
 
             <div

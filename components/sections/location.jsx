@@ -1,12 +1,12 @@
 import React from 'react';
 import Image from "next/image";
 
-const Location = (props) => (
+const Location = ({dict}) => (
     <>
-        <div className="bg-[#FAFAFA] pb-4 p-12 w-full mx-auto" >
-            <h2 data-aos="fade-up" className="text-4xl text-center font-bold text-primary mb-9">AWS DAY  <span className="text-secondary">LOCATION</span></h2>
+        <div className="bg-[#FAFAFA] pb-4 md:p-12 p-6 w-full mx-auto" >
+            <h2 data-aos="fade-up" className="md:text-4xl text-3xl text-center font-bold text-primary mb-9">{dict.location.day} <span className="text-secondary">{dict.location.title}</span></h2>
 
-            <div data-aos="fade-up" className="grid grid-cols-2 w-full mt-8 gap-2">
+            <div data-aos="fade-up" className="md:grid flex flex-col grid-cols-2 w-full mt-8 gap-2">
                 {/* Large image on the left */}
                 <Image
                     src="/en/location/1.png"

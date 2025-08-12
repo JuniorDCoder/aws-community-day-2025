@@ -21,7 +21,7 @@ export default function LanguageSwitcher({ currentLang }) {
     return (
         <button
             onClick={toggleLang}
-            className="ml-4 text-white underline underline-offset-4"
+            className="ml-4 text-white cursor-pointer underline underline-offset-4"
         >
             {currentLang === 'en' ? 'Fr' : 'En'}
         </button>

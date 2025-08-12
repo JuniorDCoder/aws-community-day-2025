@@ -19,9 +19,44 @@
   },
   "galleryTitle": "La Journée Communautaire",
   "galleryButton": "Voir la galerie complète",
-  "footer" : {
+  "footer": {
     "followUs": "Suivez-nous pour plus d'actualités",
     "contactText": "Vous pouvez nous écrire pour toute question ou proposition à",
     "copyright": "Copyright AWS Community Day Cameroon. Tous droits réservés | Réalisé par"
-  }
+  },
+  "hero": {
+    "dateLocation": "8 novembre 2025 | Buea",
+    "cta": "Réservez votre place pour AWS Day"
+  },
+  "banner": {
+    "title": "Journée Communautaire",
+    "year": " 2025"
+  },
+  "ourSpeakers": {
+    "title": "Intervenants",
+    "our": "Nos",
+    "reserve": "Réservez votre place maintenant"
+  },
+  "ourAgenda": {
+    "applyToBeSpeaker": "Intéressé à devenir conférencier ?",
+    "apply": "Postulez ici"
+  },
+  "location": {
+    "title": "JOURNÉE AWS",
+    "day": "EMPLACEMENT DE LA"
+  },
+  "organizers": {
+    "title": "Organisateurs"
+  },
+  "volunteers": {
+    "title": "Bénévoles"
+  },
+  "ourSponsors": {
+    "applyToBeSponsor": "Intéressé à devenir parrain ?",
+    "apply": "Postulez maintenant"
+  },
+    "organizingCommunities": {
+        "title": "NOS ORGANISATIONS",
+        "subtitle": "Communautés"
+    }
 }

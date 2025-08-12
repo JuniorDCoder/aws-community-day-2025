@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from "next/link";
 
-const Agenda = (props) => {
+const Agenda = ({dict}) => {
     const agendaItems = [
         { type: 'keynote', title: 'The Key Note Theme' },
         { type: 'speaker', title: 'The Key Note Theme' },
@@ -15,8 +15,8 @@ const Agenda = (props) => {
 
     return (
         <section className="flex items-center justify-center bg-primary w-full">
-            <div data-aos="fade-up" className="py-16 px-6 mx-auto max-w-7xl">
-                <h2 className="text-5xl text-white font-bold text-center mb-9">Agenda</h2>
+            <div data-aos="fade-up" className="py-16 px-6 mx-auto md:max-w-7xl">
+                <h2 className="md:text-5xl text-3xl text-white font-bold text-center mb-9">{dict.agenda}</h2>
                 <div className="mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-y-12 lg:gap-x-40">
                         {agendaItems.map((item, index) => (
@@ -58,7 +58,7 @@ const Agenda = (props) => {
                     </div>
                 </div>
 
-                <p className="text-white text-2xl font-bold text-center mt-9">Interested in becoming a speaker? <Link href="/" className="text-secondary">Apply here</Link></p>
+                <p className="text-white text-2xl font-bold text-center mt-9">{dict.ourAgenda.applyToBeSpeaker} <Link href="/" className="text-secondary">{dict.ourAgenda.apply}</Link></p>
             </div>
         </section>
     );

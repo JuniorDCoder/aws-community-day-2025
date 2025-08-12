@@ -6,7 +6,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import Link from "next/link";
 
-const Sponsors = () => {
+const Sponsors = ({dict}) => {
     const sponsorCategories = [
         {
             category: "Gold",
@@ -63,10 +63,10 @@ const Sponsors = () => {
 
     return (
         <div
-            className="bg-[#FAFAFA] flex flex-col items-center justify-center gap-8 p-12 w-full mx-auto"
+            className="bg-[#FAFAFA] flex flex-col items-center justify-center gap-8 p-6 md:p-12 w-full mx-auto"
         >
-            <h2 data-aos="fade-up"  className="text-5xl font-bold text-center mt-12 text-primary">
-                Our <span className="text-secondary">Sponsors</span>
+            <h2 data-aos="fade-up"  className="md:text-5xl text-3xl font-bold text-center mt-4 md:mt-12 text-primary">
+                {dict.ourSpeakers.our} <span className="text-secondary">Sponsors</span>
             </h2>
 
             {sponsorCategories.map((categoryData, index) => {
@@ -79,7 +79,7 @@ const Sponsors = () => {
                         </h4>
 
                         {categoryData.sponsors.length <= 4 ? (
-                            <div className="flex flex-wrap justify-center gap-6">
+                            <div className="flex md:flex-row flex-wrap justify-center gap-6">
                                 {categoryData.sponsors.map((sponsor) => (
                                     <Link
                                         href={`/`}
@@ -96,7 +96,7 @@ const Sponsors = () => {
                                 ))}
                             </div>
                         ) : (
-                            <div className="max-w-5xl mx-auto">
+                            <div className="md:max-w-5xl max-w-lg md:mx-auto">
                                 <Swiper
                                     modules={[Autoplay]}
                                     spaceBetween={30}
@@ -107,6 +107,7 @@ const Sponsors = () => {
                                     }}
                                     loop={true}
                                     breakpoints={{
+                                        320: { slidesPerView: 2 }, // mobile
                                         640: { slidesPerView: 2 },
                                         768: { slidesPerView: 3 },
                                         1024: { slidesPerView: 4 },
@@ -136,7 +137,7 @@ const Sponsors = () => {
                 );
             })}
 
-            <p className="text-primary text-2xl font-bold text-center mt-9">Interested in becoming a sponsor? <Link href="/" className="text-secondary underline">Apply here</Link></p>
+            <p className="text-primary text-2xl font-bold text-center mt-9">{dict.ourSponsors.applyToBeSponsor} <Link href="/" className="text-secondary underline">{dict.ourSponsors.apply}</Link></p>
         </div>
     );
 };

@@ -31,11 +31,11 @@ const organizersData = [
     },
 ];
 
-const Organizers = () => (
+const Organizers = ({dict}) => (
    <section className="bg-primary">
        <div className="md:p-12 p-6 bg-primary w-full flex flex-col gap-5 text-center">
            <h2 data-aos="fade-up" className="md:text-5xl text-3xl font-bold text-white mb-4 md:mb-8">
-               OUR <span className="text-secondary">Organizers</span>
+               {dict.ourSpeakers.our} <span className="text-secondary">{dict.organizers.title}</span>
            </h2>
 
            <div data-aos="fade-up" className="md:max-w-6xl max-w-lg md:mx-auto">

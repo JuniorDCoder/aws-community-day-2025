@@ -47,14 +47,14 @@ const speakersData = [
     },
 ];
 
-const Speakers = () => {
+const Speakers = ({dict}) => {
     return (
         <section className="py-12 bg-primary text-center">
-            <h2 data-aos="fade-up"  className="text-4xl font-bold text-white mb-8">
-                OUR <span className="text-secondary">SPEAKERS</span>
+            <h2 data-aos="fade-up"  className="md:text-4xl text-3xl font-bold text-white mb-8">
+                {dict.ourSpeakers.our} <span className="text-secondary">{dict.ourSpeakers.title}</span>
             </h2>
 
-            <div data-aos="fade-up"  className="max-w-6xl mx-auto">
+            <div data-aos="fade-up"  className="md:max-w-6xl max-w-lg md:mx-auto">
                 <Swiper
                     modules={[Pagination]}
                     pagination={{ clickable: true, el: ".custom-pagination", bulletClass: "custom-bullet", bulletActiveClass: "custom-bullet-active" }}
@@ -79,7 +79,7 @@ const Speakers = () => {
 
                 {/* Reserve Button */}
                 <div className="mt-8">
-                    <Button text="Reserve your seat now" />
+                    <Button text={dict.ourSpeakers.reserve} />
                 </div>
             </div>
         </section>

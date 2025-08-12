@@ -27,11 +27,11 @@ const organizingCommunities = [
     }
 ];
 
-const Communities = (props) => (
+const Communities = ({dict}) => (
     <>
         <section className="md:p-12 p-6 bg-primary w-full mx-auto flex flex-col">
             <h2 data-aos="fade-up" className="md:text-4xl text-3xl font-bold md:text-center text-white mb-4 md:mb-12">
-                OUR ORGANIZING <span className="text-secondary">COMMUNITIES </span>
+                {dict.organizingCommunities.title} <span className="text-secondary">{dict.organizingCommunities.subtitle}</span>
             </h2>
 
             <div data-aos="fade-up"  className="md:max-w-6xl max-w-lg md:mx-auto">

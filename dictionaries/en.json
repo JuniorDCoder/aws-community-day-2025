@@ -23,6 +23,40 @@
     "followUs": "Follow us for more updates",
     "contactText": "You can write to us for any questions or proposals at",
     "copyright": "Copyright AWS Community Day Cameroon. All rights reserved | Built by"
+  },
+  "hero": {
+    "dateLocation": "November 8, 2025 | Buea",
+    "cta": "RSVP for AWS Day now"
+  },
+  "banner": {
+    "title": "Community Day",
+    "year": " 2025"
+  },
+  "ourSpeakers": {
+    "title": "Speakers",
+    "our": "Our",
+    "reserve": "Reserve your seat now"
+  },
+  "ourAgenda": {
+    "applyToBeSpeaker": "Interested in becoming a speaker?",
+    "apply": "Apply here"
+  },
+  "location": {
+    "title": "Location",
+    "day": "AWS Day"
+  },
+  "organizers": {
+    "title": "Organizers"
+  },
+  "volunteers": {
+    "title": "Volunteers"
+  },
+  "ourSponsors": {
+    "applyToBeSponsor": "Interested in becoming a sponsor?",
+    "apply": "Apply Now"
+  },
+  "organizingCommunities": {
+    "title": "Our Organizing",
+    "subtitle": "Communities"
   }
-
 }
