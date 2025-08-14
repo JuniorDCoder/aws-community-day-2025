@@ -7,14 +7,13 @@ const Hero = ({ dict }) => {
     const eventDateLocation = dict.hero?.dateLocation || "November 8, 2025 | Buea";
 
     return (
-        <section className="bg-primary min-h-screen relative flex flex-col items-center justify-center py-6">
-            <div data-aos="fade-up" className="flex flex-col gap-4 items-center justify-center text-white text-center md:px-0 px-6 z-20 h-full w-full">
+        <section className="bg-primary min-h-screen relative flex flex-col items-center justify-start py-6">
+            <div data-aos="fade-up" className="flex flex-col gap-4 items-center justify-center text-white text-center md:px-0 px-6 z-20 pt-40 md:pt-24">
                 <Image
                     src="/en/banner.svg"
                     alt="AWS Community Day Cameroon 2025 Logo"
                     width={800}
                     height={400}
-                    className="mx-auto"
                 />
                 <h3 className="text-xl">{eventDateLocation}</h3>
                 <Button
