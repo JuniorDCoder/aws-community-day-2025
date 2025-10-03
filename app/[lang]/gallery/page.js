@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import React from 'react';
 import Gallery from "@/components/sections/gallery";
 import { getEventData, getGalleryData } from '@/lib/cms-data';

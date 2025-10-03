@@ -1,3 +1,7 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+
 import React from 'react';
 import Location from "@/components/sections/location";
 import Communities from "@/components/sections/communities";
