@@ -9,24 +9,92 @@ import Organizers from "@/components/sections/organizers";
 import Volunteers from "@/components/sections/volunteers";
 import BottomHero from "@/components/sections/bottom-hero";
 import Communities from "@/components/sections/communities";
+import {
+    getEventData,
+    getGalleryData,
+    getSpeakersData,
+    getAgendaData,
+    getVenueData,
+    getSponsorsData,
+    getOrganizersData,
+    getVolunteersData
+} from '@/lib/cms-data';
 import enDict from "@/dictionaries/en.json";
 import frDict from "@/dictionaries/fr.json";
 
-export default function Home({ params }) {
-    const lang = params?.lang || "en";
+export default async function Home({ params }) {
+    const parameters = await params;
+    const lang = parameters?.lang || "en";
     const dict = lang === "fr" ? frDict : enDict;
+
+    // Fetch all data in parallel for better performance
+    const [
+        eventData,
+        galleryData,
+        speakersData,
+        agendaData,
+        venueData,
+        sponsorsData,
+        organizersData,
+        volunteersData
+    ] = await Promise.all([
+        getEventData(),
+        getGalleryData(),
+        getSpeakersData(),
+        getAgendaData(),
+        getVenueData(),
+        getSponsorsData(),
+        getOrganizersData(), // Add organizers data
+        getVolunteersData() // Add volunteers data
+    ]);
+
     return (
         <>
             <main className="flex flex-col">
-                <Hero dict={dict} />
-                <Gallery dict={dict} lang={lang} />
+                <Hero
+                    dict={dict}
+                    eventData={eventData}
+                />
+                <Gallery
+                    dict={dict}
+                    lang={lang}
+                    eventData={eventData}
+                    galleryData={galleryData}
+                />
                 <Banner dict={dict} />
-                <Speakers dict={dict} />
-                <Agenda dict={dict} />
-                <Location dict={dict} />
-                <Sponsors dict={dict} />
-                <Organizers dict={dict} />
-                <Volunteers dict={dict} />
+                <Speakers
+                    viewMode="slider"
+                    dict={dict}
+                    speakersData={speakersData}
+                    agendaData={agendaData}
+                    linkToRsvp={eventData?.settings?.rsvpLink}
+                />
+                <Agenda
+                    agendaData={agendaData}
+                    settingsData={eventData}
+                    dict={dict}
+                />
+                <Location
+                    dict={dict}
+                    venueData={venueData}
+                />
+                <Sponsors
+                    dict={dict}
+                    sponsorsData={sponsorsData}
+                    settingsData={eventData?.settings}
+                />
+                <Organizers
+                    dict={dict}
+                    organizersData={organizersData}
+                    settingsData={eventData?.settings}
+                    viewMode="slider"
+                />
+                <Volunteers
+                    dict={dict}
+                    volunteersData={volunteersData}
+                    settingsData={eventData?.settings}
+                    viewMode="grid"
+                />
                 <BottomHero dict={dict} />
                 <Communities dict={dict} />
             </main>

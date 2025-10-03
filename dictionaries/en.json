@@ -4,8 +4,15 @@
   "speakers": "Speakers",
   "agenda": "Agenda",
   "sponsors": "Sponsors",
+  "eventSchedule": "Event Schedule",
+  "agendaDescription": "Join us for a day filled with inspiring talks, networking opportunities, and unforgettable experiences.",
   "team": "Team",
   "contact": "Get To Us",
+  "rsvpNow": "RSVP Now",
+  "becomeSpeaker": "Become a Speaker",
+  "becomeSponsor": "Become a Sponsor",
+  "totalDuration": "Total Duration: ",
+  "joinUs": "Ready to Join?",
   "registerNow": "Register Now",
   "timer": {
     "dontMiss": "Don't miss this",
@@ -34,8 +41,12 @@
   },
   "ourSpeakers": {
     "title": "Speakers",
+    "description": "Learn from industry experts and thought leaders shaping the future of technology",
     "our": "Our",
-    "reserve": "Reserve your seat now"
+    "reserve": "Reserve your seat now",
+    "joinEvent": "Join these amazing speakers",
+    "ctaDescription": "Don't miss this opportunity to learn from the best in the industry",
+    "featured": "Featured Speakers"
   },
   "ourAgenda": {
     "applyToBeSpeaker": "Interested in becoming a speaker?",

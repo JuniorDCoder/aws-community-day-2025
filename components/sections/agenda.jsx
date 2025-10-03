@@ -1,64 +1,367 @@
 import React from 'react';
 import Link from "next/link";
+import { Calendar, Clock, MapPin, Users, Mic, Coffee, Network, Award } from 'lucide-react';
 
-const Agenda = ({dict}) => {
-    const agendaItems = [
-        { type: 'keynote', title: 'The Key Note Theme' },
-        { type: 'speaker', title: 'The Key Note Theme' },
-        { type: 'keynote', title: 'The Key Note Theme' },
-        { type: 'speaker', title: 'The Key Note Theme' },
-        { type: 'keynote', title: 'The Key Note Theme' },
-        { type: 'speaker', title: 'The Key Note Theme' },
-        { type: 'keynote', title: 'The Key Note Theme' },
-        { type: 'speaker', title: 'The Key Note Theme' }
-    ];
+const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
+    // Extract agenda items from the data
+    const agendaItems = agendaData?.agenda || [];
+
+    // Group agenda items by time slots and add enhanced data
+    const enhancedAgenda = agendaItems.map(item => {
+        const startTime = new Date(item.startTime);
+        const endTime = new Date(item.endTime);
+
+        // Safe duration calculation
+        const durationMs = endTime.getTime() - startTime.getTime();
+        const durationMinutes = Math.max(0, Math.round(durationMs / (1000 * 60))); // Ensure non-negative
+
+        // Get type icon and color using brand colors
+        const getTypeDetails = (type) => {
+            switch (type?.toLowerCase()) {
+                case 'keynote':
+                    return {
+                        icon: Award,
+                        color: 'bg-secondary',
+                        textColor: 'text-primary',
+                        borderColor: 'border-secondary'
+                    };
+                case 'session':
+                    return {
+                        icon: Mic,
+                        color: 'bg-primary',
+                        textColor: 'text-white',
+                        borderColor: 'border-primary'
+                    };
+                case 'break':
+                    return {
+                        icon: Coffee,
+                        color: 'bg-gray-600',
+                        textColor: 'text-white',
+                        borderColor: 'border-gray-500'
+                    };
+                case 'networking':
+                    return {
+                        icon: Network,
+                        color: 'bg-gray-700',
+                        textColor: 'text-white',
+                        borderColor: 'border-gray-600'
+                    };
+                default:
+                    return {
+                        icon: Calendar,
+                        color: 'bg-gray-600',
+                        textColor: 'text-white',
+                        borderColor: 'border-gray-500'
+                    };
+            }
+        };
+
+        const typeDetails = getTypeDetails(item.type);
+
+        return {
+            ...item,
+            startTime,
+            endTime,
+            duration: durationMinutes, // Use safe duration
+            typeDetails,
+            formattedStart: startTime.toLocaleTimeString(lang === 'fr' ? 'fr-FR' : 'en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            }),
+            formattedEnd: endTime.toLocaleTimeString(lang === 'fr' ? 'fr-FR' : 'en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            }),
+            title: lang === 'fr' ? item.titleFr || item.titleEn : item.titleEn,
+            description: lang === 'fr' ? item.descriptionFr || item.descriptionEn : item.descriptionEn
+        };
+    }).sort((a, b) => a.startTime - b.startTime);
+
+    // Group by time for better visualization
+    const timeSlots = enhancedAgenda.reduce((slots, item) => {
+        const timeKey = item.formattedStart;
+        if (!slots[timeKey]) {
+            slots[timeKey] = [];
+        }
+        slots[timeKey].push(item);
+        return slots;
+    }, {});
+
+    // Get links from settings
+    const rsvpLink = settingsData?.settings?.rsvpLink;
+    const speakerLink = settingsData?.settings?.speakerLink;
+    const sponsorLink = settingsData?.settings?.sponsorLink;
+
+    // Calculate total duration safely
+    const calculateTotalDuration = () => {
+        const totalMinutes = enhancedAgenda.reduce((total, item) => {
+            return total + (item.duration || 0);
+        }, 0);
+
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+
+        // Format based on duration
+        if (hours === 0) {
+            return `${minutes}m`;
+        } else if (minutes === 0) {
+            return `${hours}h`;
+        } else {
+            return `${hours}h ${minutes}m`;
+        }
+    };
+
+    // Count unique speakers safely
+    const countUniqueSpeakers = () => {
+        const speakerIds = enhancedAgenda
+            .filter(item => item.speaker && item.speaker.id)
+            .map(item => item.speaker.id);
+        return new Set(speakerIds).size;
+    };
+
+    // Get event status safely
+    const getEventStatus = () => {
+        if (enhancedAgenda.length === 0) return 'No Schedule';
+
+        const lastEndTime = Math.max(...enhancedAgenda.map(item => item.endTime.getTime()));
+        return lastEndTime > new Date().getTime() ? 'Upcoming' : 'Completed';
+    };
+
+    const totalDuration = calculateTotalDuration();
+    const uniqueSpeakers = countUniqueSpeakers();
+    const eventStatus = getEventStatus();
+
+    // Fallback content when no agenda items
+    if (enhancedAgenda.length === 0) {
+        return (
+            <section className="relative py-20 bg-primary overflow-hidden">
+                {/* Subtle background pattern */}
+                <div className="absolute inset-0 opacity-5">
+                    <div className="absolute top-10 left-10 w-20 h-20 bg-secondary rounded-full"></div>
+                    <div className="absolute top-40 right-20 w-16 h-16 bg-white rounded-full"></div>
+                    <div className="absolute bottom-20 left-1/3 w-24 h-24 bg-secondary rounded-full"></div>
+                </div>
+
+                <div className="relative z-10 text-center px-6">
+                    <div className="max-w-4xl mx-auto">
+                        <Calendar className="w-20 h-20 text-white mx-auto mb-6 opacity-80" />
+                        <h2 className="text-5xl font-bold text-white mb-6">
+                            {dict?.agenda || "Event Agenda"}
+                        </h2>
+                        <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                            {dict?.agendaComingSoon || "Our amazing agenda is being crafted with care. Stay tuned for an unforgettable experience!"}
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            {rsvpLink && (
+                                <Link
+                                    href={rsvpLink}
+                                    className="bg-secondary text-primary px-8 py-4 rounded-xl font-semibold hover:bg-orange-600 hover:text-white transform transition-all duration-300 shadow-lg hover:shadow-xl"
+                                >
+                                    {dict?.rsvpNow || "RSVP Now"}
+                                </Link>
+                            )}
+                            {speakerLink && (
+                                <Link
+                                    href={speakerLink}
+                                    className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-primary transition-all duration-300"
+                                >
+                                    {dict?.becomeSpeaker || "Become a Speaker"}
+                                </Link>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
     return (
-        <section className="flex items-center justify-center bg-primary w-full">
-            <div data-aos="fade-up" className="py-16 px-6 mx-auto md:max-w-7xl">
-                <h2 className="md:text-5xl text-3xl text-white font-bold text-center mb-9">{dict.agenda}</h2>
-                <div className="mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-y-12 lg:gap-x-40">
-                        {agendaItems.map((item, index) => (
-                            <div key={index} className="flex items-center space-x-4">
-                                {/* Timing */}
-                                <div className="flex flex-col items-start">
-                                <span className="text-white text-2xl font-bold">
-                                    8:00 am
-                                </span>
-                                    <span className="text-white text-md font-medium">
-                                    9:00 am
-                                </span>
-                                </div>
-                                {/* Vertical line indicator */}
-                                <div className="w-1 h-16 bg-gray-300 flex-shrink-0"></div>
+        <section className="relative py-20 bg-primary overflow-hidden">
+            {/* Subtle background elements */}
+            <div className="absolute inset-0 opacity-10">
+                <div className="absolute top-0 left-0 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            </div>
 
-                                {/* Content */}
-                                <div className="flex flex-col space-y-2">
-                                    {/* Badge */}
-                                    <div className="flex">
-                                        {item.type === 'keynote' ? (
-                                            <span className="bg-secondary text-white px-3 py-1 text-xs font-medium rounded uppercase tracking-wide">
-                                            Key note
+            <div className="relative z-10 px-6 mx-auto max-w-7xl">
+                {/* Header */}
+                <div className="text-center mb-16">
+                    <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-white/20">
+                        <Calendar className="w-6 h-6 text-white" />
+                        <span className="text-white font-semibold uppercase tracking-wider text-sm">
+                            {dict?.eventSchedule || "Event Schedule"}
+                        </span>
+                    </div>
+                    <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+                        {dict?.agenda || "Event Agenda"}
+                    </h2>
+                    <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                        {dict?.agendaDescription || "Join us for a day filled with inspiring talks, networking opportunities, and unforgettable experiences."}
+                    </p>
+                </div>
+
+                {/* Agenda Timeline */}
+                <div className="max-w-6xl mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                        {Object.entries(timeSlots).map(([timeKey, items], timeIndex) => (
+                            <div key={timeKey} className="space-y-6">
+                                {/* Time Header */}
+                                <div className="flex items-center gap-4 mb-2">
+                                    <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
+                                        <Clock className="w-4 h-4 text-white" />
+                                        <span className="text-white font-bold text-lg">
+                                            {timeKey}
                                         </span>
-                                        ) : (
-                                            <span className="bg-gray-800 text-white px-3 py-1 text-xs font-medium rounded uppercase tracking-wide">
-                                            Speaker
-                                        </span>
-                                        )}
                                     </div>
-
-                                    {/* Title */}
-                                    <h3 className="text-gray-400 text-lg font-medium">
-                                        {item.title}
-                                    </h3>
+                                    <div className="flex-1 h-0.5 bg-white/20 rounded-full"></div>
                                 </div>
+
+                                {/* Agenda Items for this time slot */}
+                                {items.map((item, itemIndex) => {
+                                    const TypeIcon = item.typeDetails.icon;
+                                    return (
+                                        <div
+                                            key={item.id}
+                                            className="group relative bg-white/5 backdrop-blur-sm rounded-2xl mt-5 p-6 border border-white/10 hover:border-white/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+                                            style={{
+                                                animationDelay: `${(timeIndex * 100) + (itemIndex * 50)}ms`
+                                            }}
+                                        >
+                                            {/* Type Badge */}
+                                            <div className={`inline-flex items-center gap-2 ${item.typeDetails.color} ${item.typeDetails.textColor} px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-4 border ${item.typeDetails.borderColor}`}>
+                                                <TypeIcon className="w-3 h-3" />
+                                                {item.type}
+                                            </div>
+
+                                            {/* Title and Description */}
+                                            <h3 className="text-white text-xl font-bold mb-3 group-hover:text-secondary transition-colors duration-300">
+                                                {item.title}
+                                            </h3>
+
+                                            {item.description && (
+                                                <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+                                                    {item.description}
+                                                </p>
+                                            )}
+
+                                            {/* Meta Information */}
+                                            <div className="space-y-2">
+                                                {/* Time and Duration */}
+                                                <div className="flex items-center gap-4 text-sm text-gray-400">
+                                                    <div className="flex items-center gap-1">
+                                                        <Clock className="w-4 h-4" />
+                                                        <span>{item.formattedStart} - {item.formattedEnd}</span>
+                                                    </div>
+                                                    <span className="text-white/40">•</span>
+                                                    <span>{item.duration}min</span>
+                                                </div>
+
+                                                {/* Location */}
+                                                {item.location && (
+                                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                                        <MapPin className="w-4 h-4" />
+                                                        <span>{item.location}</span>
+                                                    </div>
+                                                )}
+
+                                                {/* Speaker */}
+                                                {item.speaker && (
+                                                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                                                        <Users className="w-4 h-4" />
+                                                        <span>{item.speaker.name}</span>
+                                                        {item.speaker.title && (
+                                                            <span className="text-white/60">• {item.speaker.title}</span>
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            {/* Hover Effect Border */}
+                                            <div className={`absolute inset-0 rounded-2xl border-2 ${item.typeDetails.borderColor} opacity-0 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none`}></div>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <p className="text-white text-2xl font-bold text-center mt-9">{dict.ourAgenda.applyToBeSpeaker} <Link href="/" className="text-secondary">{dict.ourAgenda.apply}</Link></p>
+                {/* Call to Action Section */}
+                <div className="text-center mt-16 pt-8 border-t border-white/20">
+                    <div className="max-w-2xl mx-auto">
+                        <h3 className="text-2xl font-bold text-white mb-6">
+                            {dict?.joinUs || "Ready to Join?"}
+                        </h3>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            {rsvpLink && (
+                                <Link
+                                    href={rsvpLink}
+                                    className="group bg-secondary text-primary px-8 py-4 rounded-xl font-semibold hover:bg-orange-600 hover:text-white transform transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-3"
+                                >
+                                    <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                    {dict?.rsvpNow || "RSVP Now"}
+                                </Link>
+                            )}
+                            {speakerLink && (
+                                <Link
+                                    href={speakerLink}
+                                    className="group border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-3"
+                                >
+                                    <Mic className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                    {dict?.becomeSpeaker || "Become a Speaker"}
+                                </Link>
+                            )}
+                            {sponsorLink && (
+                                <Link
+                                    href={sponsorLink}
+                                    className="group border-2 border-secondary text-secondary px-8 py-4 rounded-xl font-semibold hover:bg-secondary hover:text-primary transition-all duration-300 flex items-center gap-3"
+                                >
+                                    <Award className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                    {dict?.becomeSponsor || "Become a Sponsor"}
+                                </Link>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Quick Stats */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-8 border-t border-white/20">
+                    <div className="text-center">
+                        <div className="text-3xl font-bold text-white mb-2">
+                            {enhancedAgenda.length}
+                        </div>
+                        <div className="text-gray-400 text-sm uppercase tracking-wide">
+                            {dict?.sessions || "Sessions"}
+                        </div>
+                    </div>
+                    <div className="text-center">
+                        <div className="text-3xl font-bold text-white mb-2">
+                            {uniqueSpeakers}
+                        </div>
+                        <div className="text-gray-400 text-sm uppercase tracking-wide">
+                            {dict?.speakers || "Speakers"}
+                        </div>
+                    </div>
+                    <div className="text-center">
+                        <div className="text-3xl font-bold text-white mb-2">
+                            {eventStatus}
+                        </div>
+                        <div className="text-gray-400 text-sm uppercase tracking-wide">
+                            {dict?.status || "Status"}
+                        </div>
+                    </div>
+                    <div className="text-center">
+                        <div className="text-3xl font-bold text-white mb-2">
+                            {totalDuration}
+                        </div>
+                        <div className="text-gray-400 text-sm uppercase tracking-wide">
+                            {dict?.totalDuration || "Total Duration"}
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );

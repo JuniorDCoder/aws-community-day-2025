@@ -2,16 +2,16 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const SpeakerCard = ({ image, name, title, tag, tagColor, type = "speaker" }) => {
+const SpeakerCard = ({ photoUrl, name, title, tag, tagColor, type = "speaker" }) => {
     const isSpeaker = type === "speaker";
     const isOrganizer = type === "organizer";
     const isVolunteer = type === "volunteer";
 
     const Wrapper = (props) =>
         isSpeaker || isOrganizer ? (
-            <Link href="/" data-aos="fade-up" className="relative block rounded-lg overflow-hidden shadow-lg">
+            <div data-aos="fade-up" className="relative block rounded-lg overflow-hidden shadow-lg">
                 {props.children}
-            </Link>
+            </div>
         ) : (
             <div data-aos="fade-up" className="relative block rounded-lg overflow-hidden shadow-lg">
                 {props.children}
@@ -32,7 +32,7 @@ const SpeakerCard = ({ image, name, title, tag, tagColor, type = "speaker" }) =>
 
             {/* Image */}
             <Image
-                src={image}
+                src={photoUrl}
                 alt={name}
                 width={400}
                 height={500}
@@ -46,14 +46,14 @@ const SpeakerCard = ({ image, name, title, tag, tagColor, type = "speaker" }) =>
             <div className="absolute bottom-0 left-0 w-full p-4 z-10">
                 <h3
                     className={`text-white font-bold ${
-                        isSpeaker ? "text-3xl" : "text-xl"
+                        isSpeaker ? "text-xl" : "text-lg"
                     }`}
                 >
                     {name}
                 </h3>
                 <p
                     className={`text-gray-200 ${
-                        isSpeaker ? "text-xl" : "text-sm"
+                        isSpeaker ? "text-lg" : "text-xs"
                     }`}
                 >
                     {title}

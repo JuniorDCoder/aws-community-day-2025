@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 
-const Timer = ({ targetDate, highlightColor = "primary", classsName, dict }) => {
-    const calculateTimeLeft = () => {
+const Timer = ({ eventData, highlightColor = "primary", classsName, dict }) => {
+    const calculateTimeLeft = (targetDate) => {
+        if (!targetDate) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+
         const difference = +new Date(targetDate) - +new Date();
         if (difference <= 0) {
             return { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -30,14 +32,17 @@ const Timer = ({ targetDate, highlightColor = "primary", classsName, dict }) => 
     }, []);
 
     useEffect(() => {
-        if (!mounted) return;
+        if (!mounted || !eventData?.settings?.eventDate) return;
+
+        // Initialize timer with the event date from props
+        setTimeLeft(calculateTimeLeft(eventData.settings.eventDate));
 
         const timer = setInterval(() => {
-            setTimeLeft(calculateTimeLeft());
+            setTimeLeft(calculateTimeLeft(eventData.settings.eventDate));
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [targetDate, mounted]);
+    }, [eventData?.settings?.eventDate, mounted]);
 
     if (!mounted) {
         return null;
@@ -66,6 +71,11 @@ const Timer = ({ targetDate, highlightColor = "primary", classsName, dict }) => 
             value: timeLeft.seconds
         },
     ];
+
+    // If no event date is available, don't render the timer
+    if (!eventData?.settings?.eventDate) {
+        return null;
+    }
 
     return (
         <div

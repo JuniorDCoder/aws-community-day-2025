@@ -3,9 +3,16 @@
   "gallery": "Galerie",
   "speakers": "Intervenants",
   "agenda": "Programme",
-  "sponsors": "Sponsors",
+  "sponsors": "Commanditaires",
+  "eventSchedule": "Calendrier des événements",
+  "agendaDescription": "Rejoignez-nous pour une journée remplie de conférences inspirantes, d'opportunités de réseautage et d'expériences inoubliables.",
   "team": "Équipe",
   "contact": "Contactez-nous",
+  "joinUs": "Prêt à rejoindre?",
+  "rsvpNow": "RSVP maintenant",
+  "becomeSpeaker": "Devenez conférencier",
+  "becomeSponsor": "Devenir parrain",
+  "totalDuration": "Durée totale",
   "registerNow": "Inscrivez-vous",
   "timer": {
     "dontMiss": "Ne manquez pas cette",
@@ -34,8 +41,12 @@
   },
   "ourSpeakers": {
     "title": "Intervenants",
+    "description": "Apprenez des experts du secteur et des leaders d'opinion qui façonnent l'avenir de la technologie",
     "our": "Nos",
-    "reserve": "Réservez votre place maintenant"
+    "reserve": "Réservez votre place maintenant",
+    "joinEvent": "Rejoignez ces intervenants exceptionnels",
+    "ctaDescription": "Ne manquez pas cette opportunité d'apprendre des meilleurs du secteur",
+    "featured": "Intervenants en vedette"
   },
   "ourAgenda": {
     "applyToBeSpeaker": "Intéressé à devenir conférencier ?",

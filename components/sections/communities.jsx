@@ -11,17 +11,17 @@ import { Facebook, Linkedin, Instagram, Twitter } from "lucide-react";
 
 const organizingCommunities = [
     {
-        name: "AWS Cloud Clubs UBa",
+        name: "AWS Cloud Club UBa",
         description: "Description for Community 1",
         image: "/en/organizing-communities/1.png",
     },
     {
-        name: "AWS Cloud Clubs UBa",
+        name: "AWS Cloud Club Douala",
         description: "Description for Community 2",
         image: "/en/organizing-communities/1.png",
     },
     {
-        name: "AWS Cloud Clubs UBa",
+        name: "AWS Cloud Club Buea",
         description: "Description for Community 3",
         image: "/en/organizing-communities/1.png",
     }
