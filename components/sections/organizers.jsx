@@ -174,7 +174,7 @@ const Organizers = ({ dict, organizersData, settingsData, viewMode = "slider" })
                     </div>
 
                     <h2 data-aos="fade-up" className="md:text-5xl text-4xl font-bold text-white mb-4">
-                        {dict?.organizers?.our || "Our"} <span className="text-secondary">{dict?.organizers?.title || "Organizers"}</span>
+                        {dict?.ourSpeakers?.our || "Our"} <span className="text-secondary">{dict?.organizers?.title || "Organizers"}</span>
                     </h2>
                     <p data-aos="fade-up" className="text-gray-300 text-lg max-w-2xl mx-auto">
                         {dict?.organizers?.description || "The amazing team behind AWS Community Day Cameroon"}

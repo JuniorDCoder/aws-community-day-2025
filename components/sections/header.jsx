@@ -8,9 +8,12 @@ import Button from "@/components/button";
 import LanguageSwitcher from "@/components/language-switcher";
 import { Menu, X } from "lucide-react";
 
-const Header = ({ lang, dict }) => {
+const Header = ({ lang, dict, eventData }) => {
     const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
+
+    // Get RSVP link from event data with fallback
+    const rsvpLink = eventData?.settings?.rsvpLink || `mailto:${eventData?.contactInfo?.email || 'awsugdouala@gmail.com'}?subject=RSVP for AWS Community Day Cameroon&body=I would like to RSVP for AWS Community Day Cameroon`;
 
     const navLinks = [
         { href: `/${lang}`, label: dict?.home || "Home" },
@@ -41,7 +44,9 @@ const Header = ({ lang, dict }) => {
                     <Link
                         key={href}
                         href={href}
-                        className={pathname === href ? "text-secondary" : ""}
+                        className={`hover:text-secondary transition-colors ${
+                            pathname === href ? "text-secondary font-semibold" : ""
+                        }`}
                     >
                         {label}
                     </Link>
@@ -50,10 +55,13 @@ const Header = ({ lang, dict }) => {
             </nav>
 
             {/* Desktop Button */}
-            <Button
-                className="md:flex hidden"
-                text={dict?.registerNow || "Register Now"}
-            />
+            <div className="md:flex hidden">
+                <Button
+                    text={dict?.registerNow || "Register Now"}
+                    url={rsvpLink}
+                    className="hover:scale-105 transform transition-transform duration-300"
+                />
+            </div>
 
             {/* Mobile Hamburger */}
             <button
@@ -69,7 +77,7 @@ const Header = ({ lang, dict }) => {
                 <div className="fixed inset-0 bg-primary z-50 flex flex-col gap-8 items-center justify-start pt-24 overflow-y-auto">
                     {/* Close button in top-right */}
                     <button
-                        className="absolute top-6 right-6 text-white"
+                        className="absolute top-6 right-6 text-white hover:text-secondary transition-colors"
                         onClick={() => setMenuOpen(false)}
                     >
                         <X size={28} />
@@ -82,7 +90,7 @@ const Header = ({ lang, dict }) => {
                             href={href}
                             onClick={() => setMenuOpen(false)}
                             className={`text-2xl font-medium hover:text-secondary transition-colors ${
-                                pathname === href ? "text-secondary" : "text-white"
+                                pathname === href ? "text-secondary font-semibold" : "text-white"
                             }`}
                         >
                             {label}
@@ -90,16 +98,21 @@ const Header = ({ lang, dict }) => {
                     ))}
 
                     {/* Language Switcher */}
-                    <LanguageSwitcher currentLang={lang} />
+                    <div className="mt-4">
+                        <LanguageSwitcher currentLang={lang} />
+                    </div>
 
                     {/* Button */}
-                    <Button
-                        text={dict?.registerNow || "Register Now"}
-                        onClick={() => setMenuOpen(false)}
-                    />
+                    <div className="mt-4">
+                        <Button
+                            text={dict?.registerNow || "Register Now"}
+                            url={rsvpLink}
+                            onClick={() => setMenuOpen(false)}
+                            className="hover:scale-105 transform transition-transform duration-300"
+                        />
+                    </div>
                 </div>
             )}
-
         </header>
     );
 };

@@ -54,17 +54,47 @@
   },
   "location": {
     "title": "JOURNÉE AWS",
-    "day": "EMPLACEMENT DE LA"
+    "day": "EMPLACEMENT DE LA",
+    "description": "Rejoignez-nous dans notre lieu incroyable pour une expérience inoubliable",
+
+    "accessible": "Facilement accessible",
+    "accessibleDesc": "Emplacement pratique avec de nombreuses options de transport",
+    "spacious": "Lieu spacieux",
+    "spaciousDesc": "Assises confortables et espaces de réseautage",
+    "modern": "Installations modernes",
+    "modernDesc": "Technologies et équipements de pointe",
+    "findUs": "Nous trouver",
+    "mapDescription": "Obtenir l'itinéraire jusqu'au lieu",
+    "openMap": "Ouvrir dans Maps",
+    "aboutVenue": "À propos du lieu",
+    "visitWebsite": "Visitez le site Web",
+    "venueDetails": "Détails du lieu"
   },
   "organizers": {
-    "title": "Organisateurs"
+    "title": "Organisateurs",
+    "team": "Équipe Organisatrice",
+    "description": "L'incroyable équipe derrière AWS Community Day Cameroun"
   },
   "volunteers": {
-    "title": "Bénévoles"
+    "title": "Bénévoles",
+    "team": "Équipe de bénévoles",
+    "description": "Les incroyables bénévoles qui rendent cet événement possible",
+    "joinTeam": "Vous voulez faire la différence?",
+    "ctaDescription": "Rejoignez notre équipe de bénévoles et contribuez à créer une expérience incroyable pour la communauté",
+    "apply": "Devenez bénévole"
   },
   "ourSponsors": {
     "applyToBeSponsor": "Intéressé à devenir parrain ?",
-    "apply": "Postulez maintenant"
+    "apply": "Postulez maintenant",
+    "partners": "Nos Partenaires",
+    "our": "Our",
+    "description": "Nous sommes reconnaissants à nos incroyables sponsors qui rendent cet événement possible",
+    "joinThem": "Vous souhaitez rejoindre ces entreprises incroyables ?",
+    "ctaDescription": "Devenez sponsor et présentez votre marque à notre communauté dynamique",
+    "gold": "Commanditaires Or",
+    "silver": "Commanditaires Argent",
+    "community": "Commanditaires communautaires",
+    "communityExhibitors": "Exposants communautaires"
   },
     "organizingCommunities": {
         "title": "NOS ORGANISATIONS",

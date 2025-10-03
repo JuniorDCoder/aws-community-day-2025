@@ -14,11 +14,11 @@ const Page = async (props) => {
     ])
 return (
     <>
-        <Communities dict={dict}/>
         <Location
             dict={dict}
             venueData={venueData}
         />
+        <Communities dict={dict}/>
     </>
 )};
 

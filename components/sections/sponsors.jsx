@@ -15,34 +15,35 @@ const Sponsors = ({ dict, sponsorsData, settingsData }) => {
     // Group sponsors by type
     const sponsorCategories = [
         {
-            category: "Gold",
+            category: dict?.ourSponsors?.gold || "Gold",
             type: "GOLD",
             priority: 1,
             icon: Crown,
             sponsors: sponsors.filter(sponsor => sponsor.type === "GOLD"),
         },
         {
-            category: "Silver",
+            category: dict?.ourSponsors?.silver || "Silver",
             type: "SILVER",
             priority: 2,
             icon: Award,
             sponsors: sponsors.filter(sponsor => sponsor.type === "SILVER"),
         },
         {
-            category: "Community",
+            category: dict?.ourSponsors?.community || "Community",
             type: "COMMUNITY",
             priority: 3,
             icon: Users,
             sponsors: sponsors.filter(sponsor => sponsor.type === "COMMUNITY"),
         },
         {
-            category: "Community Exhibitors",
+            category: dict?.ourSponsors?.communityExhibitors || "Community Exhibitors",
             type: "COMMUNITY_EXHIBITOR",
             priority: 4,
             icon: Star,
             sponsors: sponsors.filter(sponsor => sponsor.type === "COMMUNITY_EXHIBITOR"),
         },
-    ].filter(category => category.sponsors.length > 0); // Only show categories with sponsors
+    ].filter(category => category.sponsors.length > 0);
+
 
     // Get size and styling based on priority
     const getSponsorStyle = (priority) => {
@@ -154,7 +155,7 @@ const Sponsors = ({ dict, sponsorsData, settingsData }) => {
                                     <div className="inline-flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-lg border border-gray-100">
                                         <CategoryIcon className="w-5 h-5 text-secondary" />
                                         <h3 className="text-xl font-bold text-primary">
-                                            {categoryData.category} Sponsors
+                                            {categoryData.category}
                                         </h3>
                                         <span className={`px-3 py-1 rounded-full text-xs font-bold ${style.badge}`}>
                                             {categoryData.sponsors.length}
@@ -288,7 +289,7 @@ const Sponsors = ({ dict, sponsorsData, settingsData }) => {
                             {sponsorCategories.find(cat => cat.type === "GOLD")?.sponsors.length || 0}
                         </div>
                         <div className="text-gray-600 text-sm uppercase tracking-wide">
-                            Gold Partners
+                            {dict?.ourSponsors?.gold}
                         </div>
                     </div>
                     <div className="text-center">

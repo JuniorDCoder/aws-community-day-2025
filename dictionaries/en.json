@@ -54,17 +54,46 @@
   },
   "location": {
     "title": "Location",
-    "day": "AWS Day"
+    "day": "AWS Day",
+    "description": "Join us at our amazing venue for an unforgettable experience",
+    "accessible": "Easily Accessible",
+    "accessibleDesc": "Convenient location with multiple transportation options",
+    "spacious": "Spacious Venue",
+    "spaciousDesc": "Comfortable seating and networking areas",
+    "modern": "Modern Facilities",
+    "modernDesc": "State-of-the-art technology and amenities and technology",
+    "findUs": "Find Us",
+    "mapDescription": "Get directions to the venue",
+    "openMap": "Open in Maps",
+    "aboutVenue": "About the Venue",
+    "visitWebsite": "Visit Website",
+    "venueDetails": "Venue Details"
   },
   "organizers": {
-    "title": "Organizers"
+    "title": "Organizers",
+    "team": "Organizing Team",
+    "description": "The amazing team behind AWS Community Day Cameroon"
   },
   "volunteers": {
-    "title": "Volunteers"
+    "title": "Volunteers",
+    "team": "Volunteer Team",
+    "description": "The amazing volunteers who make this event possible",
+    "ctaDescription": "Join our volunteer team and help create an amazing experience for the community",
+    "joinTeam": "Want to Make a Difference?",
+    "apply": "Become a Volunteer"
   },
   "ourSponsors": {
     "applyToBeSponsor": "Interested in becoming a sponsor?",
-    "apply": "Apply Now"
+    "apply": "Apply Now",
+    "partners": "Our Partners",
+    "our": "Our",
+    "description": "We're grateful to our amazing sponsors who make this event possible",
+    "joinThem": "Want to Join These Amazing Companies?",
+    "ctaDescription": "Become a sponsor and showcase your brand to our vibrant community",
+    "gold": "Gold Sponsors",
+    "silver": "Silver Sponsors",
+    "community": "Community Sponsors",
+    "communityExhibitors": "Community Exhibitors"
   },
   "organizingCommunities": {
     "title": "Our Organizing",
