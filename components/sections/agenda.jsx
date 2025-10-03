@@ -2,7 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import { Calendar, Clock, MapPin, Users, Mic, Coffee, Network, Award } from 'lucide-react';
 
-const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
+const Agenda = ({ dict, agendaData, settingsData, lang }) => {
     // Extract agenda items from the data
     const agendaItems = agendaData?.agenda || [];
 
@@ -58,24 +58,40 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
 
         const typeDetails = getTypeDetails(item.type);
 
+        // Get localized content based on language
+        const getLocalizedContent = () => {
+            if (lang === 'fr') {
+                return {
+                    title: item.titleFr || item.titleEn, // Use French title if available, fallback to English
+                    description: item.descriptionFr || item.descriptionEn // Use French description if available
+                };
+            }
+            return {
+                title: item.titleEn,
+                description: item.descriptionEn
+            };
+        };
+
+        const localizedContent = getLocalizedContent();
+
         return {
             ...item,
             startTime,
             endTime,
-            duration: durationMinutes, // Use safe duration
+            duration: durationMinutes,
             typeDetails,
             formattedStart: startTime.toLocaleTimeString(lang === 'fr' ? 'fr-FR' : 'en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
-                hour12: true
+                hour12: lang !== 'fr' // Use 12-hour format for English, 24-hour for French
             }),
             formattedEnd: endTime.toLocaleTimeString(lang === 'fr' ? 'fr-FR' : 'en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
-                hour12: true
+                hour12: lang !== 'fr'
             }),
-            title: lang === 'fr' ? item.titleFr || item.titleEn : item.titleEn,
-            description: lang === 'fr' ? item.descriptionFr || item.descriptionEn : item.descriptionEn
+            title: localizedContent.title,
+            description: localizedContent.description
         };
     }).sort((a, b) => a.startTime - b.startTime);
 
@@ -103,13 +119,13 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
 
-        // Format based on duration
+        // Format based on duration and language
         if (hours === 0) {
-            return `${minutes}m`;
+            return lang === 'fr' ? `${minutes}min` : `${minutes}m`;
         } else if (minutes === 0) {
-            return `${hours}h`;
+            return lang === 'fr' ? `${hours}h` : `${hours}h`;
         } else {
-            return `${hours}h ${minutes}m`;
+            return lang === 'fr' ? `${hours}h ${minutes}min` : `${hours}h ${minutes}m`;
         }
     };
 
@@ -121,17 +137,38 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
         return new Set(speakerIds).size;
     };
 
-    // Get event status safely
+    // Get event status safely with localization
     const getEventStatus = () => {
-        if (enhancedAgenda.length === 0) return 'No Schedule';
+        if (enhancedAgenda.length === 0) {
+            return lang === 'fr' ? 'Aucun horaire' : 'No Schedule';
+        }
 
         const lastEndTime = Math.max(...enhancedAgenda.map(item => item.endTime.getTime()));
-        return lastEndTime > new Date().getTime() ? 'Upcoming' : 'Completed';
+        if (lastEndTime > new Date().getTime()) {
+            return lang === 'fr' ? 'À venir' : 'Upcoming';
+        } else {
+            return lang === 'fr' ? 'Terminé' : 'Completed';
+        }
     };
 
     const totalDuration = calculateTotalDuration();
     const uniqueSpeakers = countUniqueSpeakers();
     const eventStatus = getEventStatus();
+
+    // Localized strings for the component
+    const localizedStrings = {
+        sessions: lang === 'fr' ? 'Sessions' : 'Sessions',
+        speakers: lang === 'fr' ? 'Intervenants' : 'Speakers',
+        status: lang === 'fr' ? 'Statut' : 'Status',
+        totalDuration: lang === 'fr' ? 'Durée totale' : 'Total Duration',
+        eventSchedule: lang === 'fr' ? 'Horaire de l\'événement' : 'Event Schedule',
+        agendaDescription: lang === 'fr' ? 'Rejoignez-nous pour une journée remplie de conférences inspirantes, d\'opportunités de networking et d\'expériences inoubliables.' : 'Join us for a day filled with inspiring talks, networking opportunities, and unforgettable experiences.',
+        joinUs: lang === 'fr' ? 'Prêt à nous rejoindre ?' : 'Ready to Join?',
+        rsvpNow: lang === 'fr' ? 'Réserver maintenant' : 'RSVP Now',
+        becomeSpeaker: lang === 'fr' ? 'Devenir Intervenant' : 'Become a Speaker',
+        becomeSponsor: lang === 'fr' ? 'Devenir Sponsor' : 'Become a Sponsor',
+        agendaComingSoon: lang === 'fr' ? 'Notre programme incroyable est en cours de préparation. Restez à l\'écoute pour une expérience inoubliable !' : 'Our amazing agenda is being crafted with care. Stay tuned for an unforgettable experience!'
+    };
 
     // Fallback content when no agenda items
     if (enhancedAgenda.length === 0) {
@@ -148,10 +185,10 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                     <div className="max-w-4xl mx-auto">
                         <Calendar className="w-20 h-20 text-white mx-auto mb-6 opacity-80" />
                         <h2 className="text-5xl font-bold text-white mb-6">
-                            {dict?.agenda || "Event Agenda"}
+                            {dict?.agenda || localizedStrings.eventSchedule}
                         </h2>
                         <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                            {dict?.agendaComingSoon || "Our amazing agenda is being crafted with care. Stay tuned for an unforgettable experience!"}
+                            {dict?.agendaComingSoon || localizedStrings.agendaComingSoon}
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -160,7 +197,7 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                                     href={rsvpLink}
                                     className="bg-secondary text-primary px-8 py-4 rounded-xl font-semibold hover:bg-orange-600 hover:text-white transform transition-all duration-300 shadow-lg hover:shadow-xl"
                                 >
-                                    {dict?.rsvpNow || "RSVP Now"}
+                                    {dict?.rsvpNow || localizedStrings.rsvpNow}
                                 </Link>
                             )}
                             {speakerLink && (
@@ -168,7 +205,7 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                                     href={speakerLink}
                                     className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-primary transition-all duration-300"
                                 >
-                                    {dict?.becomeSpeaker || "Become a Speaker"}
+                                    {dict?.becomeSpeaker || localizedStrings.becomeSpeaker}
                                 </Link>
                             )}
                         </div>
@@ -192,14 +229,14 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                     <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-white/20">
                         <Calendar className="w-6 h-6 text-white" />
                         <span className="text-white font-semibold uppercase tracking-wider text-sm">
-                            {dict?.eventSchedule || "Event Schedule"}
+                            {dict?.eventSchedule || localizedStrings.eventSchedule}
                         </span>
                     </div>
                     <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-                        {dict?.agenda || "Event Agenda"}
+                        {dict?.agenda || localizedStrings.eventSchedule}
                     </h2>
                     <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                        {dict?.agendaDescription || "Join us for a day filled with inspiring talks, networking opportunities, and unforgettable experiences."}
+                        {dict?.agendaDescription || localizedStrings.agendaDescription}
                     </p>
                 </div>
 
@@ -256,7 +293,9 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                                                         <span>{item.formattedStart} - {item.formattedEnd}</span>
                                                     </div>
                                                     <span className="text-white/40">•</span>
-                                                    <span>{item.duration}min</span>
+                                                    <span>
+                                                        {item.duration}{lang === 'fr' ? 'min' : 'min'}
+                                                    </span>
                                                 </div>
 
                                                 {/* Location */}
@@ -293,7 +332,7 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                 <div className="text-center mt-16 pt-8 border-t border-white/20">
                     <div className="max-w-2xl mx-auto">
                         <h3 className="text-2xl font-bold text-white mb-6">
-                            {dict?.joinUs || "Ready to Join?"}
+                            {dict?.joinUs || localizedStrings.joinUs}
                         </h3>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             {rsvpLink && (
@@ -302,7 +341,7 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                                     className="group bg-secondary text-primary px-8 py-4 rounded-xl font-semibold hover:bg-orange-600 hover:text-white transform transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-3"
                                 >
                                     <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                                    {dict?.rsvpNow || "RSVP Now"}
+                                    {dict?.rsvpNow || localizedStrings.rsvpNow}
                                 </Link>
                             )}
                             {speakerLink && (
@@ -311,7 +350,7 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                                     className="group border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-3"
                                 >
                                     <Mic className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                                    {dict?.becomeSpeaker || "Become a Speaker"}
+                                    {dict?.becomeSpeaker || localizedStrings.becomeSpeaker}
                                 </Link>
                             )}
                             {sponsorLink && (
@@ -320,7 +359,7 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                                     className="group border-2 border-secondary text-secondary px-8 py-4 rounded-xl font-semibold hover:bg-secondary hover:text-primary transition-all duration-300 flex items-center gap-3"
                                 >
                                     <Award className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                                    {dict?.becomeSponsor || "Become a Sponsor"}
+                                    {dict?.becomeSponsor || localizedStrings.becomeSponsor}
                                 </Link>
                             )}
                         </div>
@@ -334,7 +373,7 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                             {enhancedAgenda.length}
                         </div>
                         <div className="text-gray-400 text-sm uppercase tracking-wide">
-                            {dict?.sessions || "Sessions"}
+                            {dict?.sessions || localizedStrings.sessions}
                         </div>
                     </div>
                     <div className="text-center">
@@ -342,7 +381,7 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                             {uniqueSpeakers}
                         </div>
                         <div className="text-gray-400 text-sm uppercase tracking-wide">
-                            {dict?.speakers || "Speakers"}
+                            {dict?.speakers || localizedStrings.speakers}
                         </div>
                     </div>
                     <div className="text-center">
@@ -350,7 +389,7 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                             {eventStatus}
                         </div>
                         <div className="text-gray-400 text-sm uppercase tracking-wide">
-                            {dict?.status || "Status"}
+                            {dict?.status || localizedStrings.status}
                         </div>
                     </div>
                     <div className="text-center">
@@ -358,7 +397,7 @@ const Agenda = ({ dict, agendaData, settingsData, lang = 'en' }) => {
                             {totalDuration}
                         </div>
                         <div className="text-gray-400 text-sm uppercase tracking-wide">
-                            {dict?.totalDuration || "Total Duration"}
+                            {dict?.totalDuration || localizedStrings.totalDuration}
                         </div>
                     </div>
                 </div>

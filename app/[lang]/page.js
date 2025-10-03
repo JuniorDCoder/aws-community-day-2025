@@ -44,8 +44,8 @@ export default async function Home({ params }) {
         getAgendaData(),
         getVenueData(),
         getSponsorsData(),
-        getOrganizersData(), // Add organizers data
-        getVolunteersData() // Add volunteers data
+        getOrganizersData(),
+        getVolunteersData()
     ]);
 
     return (
@@ -73,6 +73,7 @@ export default async function Home({ params }) {
                     agendaData={agendaData}
                     settingsData={eventData}
                     dict={dict}
+                    lang={lang}
                 />
                 <Location
                     dict={dict}

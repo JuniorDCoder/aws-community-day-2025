@@ -15,7 +15,7 @@ const Page = async (props) => {
     ])
     return (
         <>
-            <Agenda agendaData={agendaData} settingsData={settingsData} dict={dict} />
+            <Agenda lang={lang} agendaData={agendaData} settingsData={settingsData} dict={dict} />
             <Banner dict={dict} />
         </>
     )};
