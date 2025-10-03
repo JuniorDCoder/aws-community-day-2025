@@ -1,3 +1,7 @@
+export const dynamic = 'force-dynamic'; // Add this line
+export const revalidate = 0;
+
+
 import Hero from "@/components/sections/hero";
 import Gallery from "@/components/sections/gallery";
 import Banner from "@/components/sections/banner";
